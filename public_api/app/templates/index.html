@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="country" placeholder="Enter the country name">
+        <button>SEARCH</button>
+    </form>
+    <h1>LIST OF COUNTRIES</h1>
+    {% for i in data %}
+    <p>name:{{i.name.common}} <br> Official{{i.name.official}}</p>
+    <p>Capital:{{i.capital.0}}</p>
+
+    <img src="{{i.flags.png}}" alt="">
+    {% endfor %}
+</body>
+</html>

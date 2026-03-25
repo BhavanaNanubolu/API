@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Country Details</title>
+</head>
+<body>
+
+    <h2>{{ a.name.common }}</h2>
+
+    <p><b>Capital:</b> {{ a.capital.0 }}</p>
+    <p><b>Region:</b> {{ a.region }}</p>
+    <p><b>Subregion:</b> {{ a.subregion }}</p>
+
+    <p><b>Borders:</b>
+        {% for b in a.0.borders %}
+            {{ b }},
+        
+        {% endfor %}
+    </p>
+
+    <p><b>Area:</b> {{ a.0.area }} km²</p>
+    <p><b>Population:</b> {{ a.population }}</p>
+
+    <p><b>Google Maps:</b>
+        <a href="{{ a.maps.googleMaps }}" target="_blank">Open Map</a>
+    </p>
+
+    <p><b>Timezone:</b> {{ a.timezones.0 }}</p>
+    <p><b>Continent:</b> {{ a.continents.0 }}</p>
+
+    <p><b>Currency:</b>
+        {% for key, value in a.currencies.items %}
+            {{ value.name }} ({{ value.symbol }})
+        {% endfor %}
+    </p>
+
+    <p><b>Languages:</b>
+        {% for key, value in a.languages.items %}
+            {{ value }},
+        {% endfor %}
+    </p>
+
+    <p><b>Latitude:</b> {{ a.latlng.0 }}</p>
+    <p><b>Longitude:</b> {{ a.latlng.1 }}</p>
+
+    <p><b>Flag:</b><br>
+        <img src="{{ a.flags.png }}" width="150">
+    </p>
+
+    <p><b>Coat of Arms:</b><br>
+        {% if a.0.coatOfArms.png %}
+            <img src="{{ a.coatOfArms.png }}" width="150">
+        
+        {% endif %}
+    </p>
+
+    <p><b>Start of Week:</b> {{ a.startOfWeek }}</p>
+
+    <p><b>Postal Code:</b>
+        {% if a.postalCode %}
+            {{ a.postalCode.format }}
+       
+        {% endif %}
+    </p>
+
+    <p><b>Independent:</b>
+        {% if a.0.independent %}
+            ✔
+        {% else %}
+            ❌
+        {% endif %}
+    </p>
+
+    <p><b>Driving Side:</b> {{ a.car.side }}</p>
+
+</body>
+</html>
