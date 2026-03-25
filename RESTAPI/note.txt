@@ -1,0 +1,88 @@
+pip install djangorestframework
+
+conf in settings 
+INSTALLED_APPS = [
+    ...
+    'app',
+    'rest_framework',
+]
+
+create serializer 
+
+from rest_framework import serializers
+from .models import Travels
+
+class TravelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Travels
+        fields = "__all__"
+
+
+import in views 
+for displaying data
+@api_view(['get'])
+def index(request):
+    if request.method == "GET":
+        a = Travels.objects.all()
+        serail =TravelSerializer(a,many = True)
+        return Response(serail.data)
+   
+
+for creaating data
+@api_view(['get','post'])
+def index(request):
+    ....
+    elif request.method  == "POST":
+        a = TravelSerializer(data = request.data)
+        if a.is_valid():
+            a.save()
+            return Response(a.data)
+        
+        
+# for display single data 
+
+@api_view(['get'])
+def update(request,id):
+    try:
+        a = Travels.objects.get(id = id)
+    except Exception as e:
+        return Response(e)
+    if a:
+        if request.method == "GET":
+            serail = TravelSerializer(a)
+            return Response(serail.data)
+     
+# modifcation 
+
+@api_view(['get','put'])
+def update(request,id):
+    try:
+        a = Travels.objects.get(id = id)
+    except Exception as e:
+        return Response(e)
+    if a:
+       ....
+        if request.method == "PUT":
+            b = TravelSerializer(instance = a ,data = request.data)
+            if b.is_valid():
+                b.save()
+                return Response(b.data,status= status.HTTP_200_OK)        
+
+            else:
+                return Response(status=status.HTTP_304_NOT_MODIFIED)
+   
+
+
+# for delete 
+
+@api_view(['get','put','delete'])
+def update(request,id):
+    try:
+        a = Travels.objects.get(id = id)
+    except Exception as e:
+        return Response(e)
+    if a:
+      ....
+        elif request.method == "DELETE":
+            a.delete()
+            return Response(status=status.HTTP_200_OK)

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    input{
+        height: 30px;
+        width: 400px;
+        border: 2px  solid black;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    button{
+        height: 40px;
+        border: 2px  solid black;
+        border-radius: 10px;
+        background-color: palevioletred;
+        border-bottom: 4px solid black;
+        border-right: 4px solid black;
+        margin-bottom: 20px;
+        padding: 10px;
+        color: white;
+    }
+    button:hover{
+        background-color: palegreen;
+    }
+    form{
+        position: relative;
+        left: 25%;
+    }
+    table{
+        width: 800px;
+        position: relative;
+        left: 20%;
+    
+        tr{
+            height: 30px;
+            margin: 10px;
+            th{
+                background-color: paleturquoise;
+                width: 200px;
+                border-radius: 10px;
+                border: 2px  solid  black;
+                border-bottom: 4px solid black;
+                border-right: 4px solid black;
+                                                        /* color: white; */
+
+                
+
+            }
+            th:hover{
+                background-color: aquamarine;
+            }
+            td{
+                width: 550px;
+                text-align: center;
+                            
+            }
+        }
+    }
+</style>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="city" placeholder="City Name.."  onclick="clearTable()">
+<button >Get Weather</button>
+    </form>
+   
+    <table id="city">
+    <tr><th>Longitude</th>
+    <td>{{data.coord.lon}}</td></tr>
+    <tr>
+        <th>Latitude</th>
+        <td>{{data.coord.lat}}</td>
+    </tr>
+    <tr>
+        <th>Temperature</th>
+        <td>{{data.main.temp}}</td>
+    </tr>
+    <tr>
+        <th>Pressure</th>
+        <td>{{data.main.pressure}}</td>
+    </tr>  
+    <tr>
+        <th>Humidity</th>
+        <td>{{data.main.humidity}}</td>
+    </tr>
+    <tr>
+        <th>Visibility</th>
+        <td>{{data.visibility}}</td>
+    </tr>    
+    <tr>
+        <th>Wind Speed</th>
+        <td>{{data.wind.speed}}</td>
+    </tr>    
+    <tr>
+        <th>Country</th>
+        <td>{{data.sys.country}}</td>
+    </tr>
+    <tr>
+        <th>Code</th>
+        <td>{{data.cod}}</td>
+    </tr>
+    <tr>
+        <th>TimeZone</th>
+        <td>{{data.timezone}}</td>
+    </tr>
+      
+    </table>
+    <script>
+        let a = document.getElementById('city');
+
+function clearTable() {
+    a.innerHTML = "";
+}
+    </script>
+</body>
+</html>
